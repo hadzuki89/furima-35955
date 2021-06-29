@@ -2,18 +2,17 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| email              | string | null: false |
+| email              | string | null: false, unique: true |
 | encrypted_password | string | null: false |
 | name               | string | null: false |
 | last_name          | string | null: false |
 | first_name         | string | null: false |
 | last_name_kana     | string | null: false |
 | first_name_kana    | string | null: false |
-| birth_day          | string | null: false |
-| name               | string | null: false |
+| birth_day          | date   | null: false |
 
 - has_many :items
-- has_many :comments
+- has_many :purchase_records
 
 ## items テーブル
 
@@ -25,29 +24,35 @@
 | condition          | string | null: false |
 | delivery_fee       | string | null: false |
 | area               | string | null: false |
-| days               | string | null: false |
+| day                | string | null: false |
 | price              | string | null: false |
-| user_id            | references |
+| user               | references | foreign_key: true |
 
 - belongs_to :user
-- has_many :comments
+- has_one :purchase_record
 
-## comments テーブル
+## destination テーブル
+
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| postal_code        | string | null: false |
+| prefecture         | string | null: false |
+| city               | string | null: false |
+| house_number       | string | null: false |
+| building           | string | null: false |
+| number             | string | null: false |
+| item               | references | foreign_key: true |
+| user               | references | foreign_key: true |
+
+- belongs_to :purchase_record
+
+## purchase_record テーブル
 
 | Column             | Type       | Options     |
 | ------------------ | ---------- | ----------- |
-| comment            | text       | null: false |
-| user_id            | references |
-| item_id            | references |
+| user               | references | foreign_key: true |
+| item               | references | foreign_key: true |
 
+- belongs_to :destination
 - belongs_to :user
 - belongs_to :item
-
-## card テーブル
-
-| Column             | Type       | Options     |
-| ------------------ | ---------- | ----------- |
-| card               | text       | null: false |
-| user_id            | references |
-
-- belongs_to :user
