@@ -16,16 +16,16 @@
 
 ## items テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| name               | string | null: false |
-| description        | text   | null: false |
-| category           | string | null: false |
-| condition          | string | null: false |
-| delivery_fee       | string | null: false |
-| area               | string | null: false |
-| day                | string | null: false |
-| price              | string | null: false |
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| name               | string  | null: false |
+| description        | text    | null: false |
+| category_id        | integer | null: false |
+| condition_id       | integer | null: false |
+| delivery_fee_id    | integer | null: false |
+| area_id            | integer | null: false |
+| day_id             | integer | null: false |
+| price              | integer | null: false |
 | user               | references | foreign_key: true |
 
 - belongs_to :user
@@ -36,13 +36,12 @@
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | postal_code        | string | null: false |
-| prefecture         | string | null: false |
+| area               | string | null: false |
 | city               | string | null: false |
 | house_number       | string | null: false |
-| building           | string | null: false |
+| building           | string |
 | number             | string | null: false |
-| item               | references | foreign_key: true |
-| user               | references | foreign_key: true |
+| purchase_record    | references | foreign_key: true |
 
 - belongs_to :purchase_record
 
@@ -52,7 +51,8 @@
 | ------------------ | ---------- | ----------- |
 | user               | references | foreign_key: true |
 | item               | references | foreign_key: true |
+|                | references | foreign_key: true |
 
-- belongs_to :destination
+- has_one :destination
 - belongs_to :user
 - belongs_to :item
