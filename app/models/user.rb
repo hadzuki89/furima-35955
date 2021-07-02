@@ -5,7 +5,19 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :email, presence: true, uniqueness: true
-  validates :name, :password, :last_name, :first_name, :last_name_kana, :first_name_kana, :birth_day, presence: true
+  validates :name, :birth_day, presence: true
+
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  validates_format_of :password, with: PASSWORD_REGEX
+
+  validates :last_name,presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/}
+
+  validates :first_name,presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/}
+
+  validates :last_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/}
+
+  validates :first_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/}
+
   has_many :items
   has_many :purchase_records
   
