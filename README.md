@@ -12,7 +12,7 @@
 | birth_day          | date   | null: false |
 
 - has_many :items
-- has_many :purchase_records
+- has_many :orders
 
 ## items テーブル
 
@@ -29,23 +29,23 @@
 | user               | references | foreign_key: true |
 
 - belongs_to :user
-- has_one :purchase_record
+- has_one :order
 
 ## destination テーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | postal_code        | string | null: false |
-| area               | string | null: false |
+| area_id            | integer | null: false |
 | city               | string | null: false |
 | house_number       | string | null: false |
 | building           | string |
 | number             | string | null: false |
-| purchase_record    | references | foreign_key: true |
+| order              | references | foreign_key: true |
 
-- belongs_to :purchase_record
+- belongs_to :order
 
-## purchase_record テーブル
+## order テーブル
 
 | Column             | Type       | Options     |
 | ------------------ | ---------- | ----------- |
