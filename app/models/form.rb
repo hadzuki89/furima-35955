@@ -1,14 +1,13 @@
 class Form
   include ActiveModel::Model
-  attr_accessor :postal_code, :area_id, :city, :house_number, :building, :number, :user_id, :item_id
+  attr_accessor :postal_code, :area_id, :city, :house_number, :building, :number, :user_id, :item_id, :token
 
-  # ここにバリデーションの処理を書く
   validates :postal_code, presence: true, format: { with: /\A\d{3}[-]\d{4}\z/ }
-  validates :city, :house_number, presence: true
   validates :number, presence: true, format: { with: /\A\d{10,11}\z/ }
-  validates :area_id, numericality: { other_than: 1 }
-  validates :user_id, :item_id, presence: true
 
+  validates :city, :house_number, :user_id, :item_id, :token, presence: true
+  validates :area_id, numericality: { other_than: 1 }
+  
   # belongs_to :user
   # belongs_to :item
 

@@ -95,9 +95,15 @@ RSpec.describe Form, type: :model do
         expect(@form.errors.full_messages).to include 'Number is invalid'
       end
 
+      it "tokenが空では登録できないこと" do
+        @form.token = nil
+        @form.valid?
+        expect(@form.errors.full_messages).to include "Token can't be blank"
+      end
+
     end
     context '商品購入できるとき' do
-      it 'postal_codeとarea_id、city、house_number、numberが存在すれば登録できること' do
+      it 'postal_codeとarea_id、city、house_number、number、tokenが存在すれば登録できること' do
         expect(@form).to be_valid
       end
     end
