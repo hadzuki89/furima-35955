@@ -8,9 +8,6 @@ class Form
   validates :city, :house_number, :user_id, :item_id, :token, presence: true
   validates :area_id, numericality: { other_than: 1 }
 
-  # belongs_to :user
-  # belongs_to :item
-
   def save
     order = Order.create(item_id: item_id, user_id: user_id)
     Destination.create(postal_code: postal_code, area_id: area_id, city: city, house_number: house_number, building: building,
