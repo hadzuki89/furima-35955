@@ -20,7 +20,7 @@ RSpec.describe Form, type: :model do
       it 'postal_codeが全角では登録できない' do
         @form.postal_code = '１２３ー４５６７'
         @form.valid?
-        expect(@form.errors.full_messages).to include "Postal code is invalid"
+        expect(@form.errors.full_messages).to include 'Postal code is invalid'
       end
 
       it 'postal_codeが半角数字とハイフン以外では登録できない' do
@@ -38,7 +38,7 @@ RSpec.describe Form, type: :model do
       it 'area_idが空では登録できない' do
         @form.area_id = ''
         @form.valid?
-        expect(@form.errors.full_messages).to include "Area is not a number"
+        expect(@form.errors.full_messages).to include 'Area is not a number'
       end
 
       it 'area_idが1だと出品できない' do
@@ -68,13 +68,13 @@ RSpec.describe Form, type: :model do
       it 'numberは10桁以上11桁以内の半角数値でないと登録できない' do
         @form.number = '１あー1'
         @form.valid?
-        expect(@form.errors.full_messages).to include "Number is invalid"
+        expect(@form.errors.full_messages).to include 'Number is invalid'
       end
 
       it 'numberが9桁以下では登録できない' do
         @form.number = '111111111'
         @form.valid?
-        expect(@form.errors.full_messages).to include "Number is invalid"
+        expect(@form.errors.full_messages).to include 'Number is invalid'
       end
 
       it 'numberが12桁以上では登録できない' do
@@ -86,7 +86,7 @@ RSpec.describe Form, type: :model do
       it 'numberが全角では登録できない' do
         @form.number = '１１１１１１１１１１'
         @form.valid?
-        expect(@form.errors.full_messages).to include "Number is invalid"
+        expect(@form.errors.full_messages).to include 'Number is invalid'
       end
 
       it 'numberが数字以外では登録できない' do
@@ -95,12 +95,11 @@ RSpec.describe Form, type: :model do
         expect(@form.errors.full_messages).to include 'Number is invalid'
       end
 
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @form.token = nil
         @form.valid?
         expect(@form.errors.full_messages).to include "Token can't be blank"
       end
-
     end
     context '商品購入できるとき' do
       it 'postal_codeとarea_id、city、house_number、number、tokenが存在すれば登録できること' do
