@@ -4,7 +4,6 @@ RSpec.describe Form, type: :model do
   before do
     user = FactoryBot.create(:user)
     item = FactoryBot.create(:item)
-    # binding.pry
     @form = FactoryBot.build(:form, user_id: user.id, item_id: item.id)
     sleep 1
   end
@@ -100,9 +99,24 @@ RSpec.describe Form, type: :model do
         @form.valid?
         expect(@form.errors.full_messages).to include "Token can't be blank"
       end
+
+      it 'user_idが空では登録できないこと' do
+        @form.user_id = nil
+        @form.valid?
+        expect(@form.errors.full_messages).to include "User can't be blank"
+      end
+
+      it 'item_idが空では登録できないこと' do
+        @form.item_id = nil
+        @form.valid?
+        expect(@form.errors.full_messages).to include "Item can't be blank"
+      end
     end
     context '商品購入できるとき' do
       it 'postal_codeとarea_id、city、house_number、number、tokenが存在すれば登録できること' do
+        expect(@form).to be_valid
+      end
+      it '建物名が空でも保存できること' do
         expect(@form).to be_valid
       end
     end

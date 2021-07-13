@@ -1,19 +1,14 @@
 class OrdersController < ApplicationController
-  before_action :set_item, only: :index
+  before_action :set_item, only: [:index, :create]
   before_action :authenticate_user!, only: :index
   before_action :contributor_confirmation, only: :index
 
   def index
+    redirect_to root_path if @item.order.present?
     @form = Form.new
-    @item = Item.find(params[:item_id])
-  end
-
-  def new
-    @destination = Destination.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @form = Form.new(form_params)
 
     if @form.valid?
