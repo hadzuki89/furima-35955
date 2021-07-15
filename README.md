@@ -13,6 +13,7 @@
 
 - has_many :items
 - has_many :orders
+- has_many :comments
 
 ## items テーブル
 
@@ -30,6 +31,7 @@
 
 - belongs_to :user
 - has_one :order
+- has_many :comments
 
 ## destination テーブル
 
@@ -54,5 +56,16 @@
 |                | references | foreign_key: true |
 
 - has_one :destination
+- belongs_to :user
+- belongs_to :item
+
+## comments テーブル
+
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| text   | text       | null: false                    |
+| user   | references | foreign_key: true              |
+| item   | references | foreign_key: true              |
+
 - belongs_to :user
 - belongs_to :item
