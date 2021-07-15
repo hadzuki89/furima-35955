@@ -4,6 +4,8 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
+  has_many :comments, dependent: :destroy
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :condition
